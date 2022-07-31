@@ -10,6 +10,8 @@ const randomRGBButton = document.querySelector(
   ".container .editor .random-rgb button"
 );
 
+const blackButton = document.querySelector(".container .editor .color button");
+
 // Function declarations
 function makeGrid(size) {
   const container = document.querySelector(".container");
@@ -52,7 +54,7 @@ function draw() {
       div.style.backgroundColor = generateRandomRGB();
       return;
     }
-    div.classList.add("trail");
+    div.style.backgroundColor = "black";
   });
 }
 
@@ -87,6 +89,13 @@ function switchButton(button) {
       isRandom = true;
       randomRGBButton.classList.add("clicked");
       eraserButton.classList.remove("clicked");
+      break;
+    case "black":
+      isErase = false;
+      isRandom = false;
+      eraserButton.classList.remove("clicked");
+      randomRGBButton.classList.remove("clicked");
+      blackButton.classList.add("clicked");
       break;
   }
 }
@@ -127,6 +136,15 @@ function watchRandomRGBButton() {
   });
 }
 
+function watchBlackButton() {
+  const blackButton = document.querySelector(
+    ".container .editor .color button"
+  );
+  blackButton.addEventListener("click", (e) => {
+    switchButton("black");
+  });
+}
+
 // Main Program
 
 makeGrid(16);
@@ -135,3 +153,4 @@ getGridSize();
 watchEraseButton();
 watchClearButton();
 watchRandomRGBButton();
+watchBlackButton();
