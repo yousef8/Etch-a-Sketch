@@ -1,5 +1,14 @@
 // Global Variables
 let isErase = false;
+let isRandom = false;
+
+const eraserButton = document.querySelector(
+  ".container .editor .eraser button"
+);
+
+const randomRGBButton = document.querySelector(
+  ".container .editor .random-rgb button"
+);
 
 // Function declarations
 function makeGrid(size) {
@@ -35,7 +44,12 @@ function draw() {
   gridContainer.addEventListener("mousemove", (e) => {
     const div = e.target;
     if (isErase) {
-      e.target.classList.remove("trail");
+      div.classList.remove("trail");
+      return;
+    }
+
+    if (isRandom) {
+      div.style.backgroundColor = generateRandomRGB();
       return;
     }
     div.classList.add("trail");
@@ -60,22 +74,30 @@ function getGridSize() {
   });
 }
 
-function erase() {
-  const eraserButton = document.querySelector(
-    ".container .editor .eraser button"
-  );
-  eraserButton.addEventListener("click", (e) => {
-    if (isErase) {
+function switchButton(button) {
+  switch (button) {
+    case "eraser":
+      isErase = true;
+      isRandom = false;
+      eraserButton.classList.add("clicked");
+      randomRGBButton.classList.remove("clicked");
+      break;
+    case "randomRGB":
       isErase = false;
-      e.target.classList.remove("clicked");
-      return;
-    }
-    e.target.classList.add("clicked");
-    isErase = true;
+      isRandom = true;
+      randomRGBButton.classList.add("clicked");
+      eraserButton.classList.remove("clicked");
+      break;
+  }
+}
+
+function watchEraseButton() {
+  eraserButton.addEventListener("click", (e) => {
+    switchButton("eraser");
   });
 }
 
-function clear() {
+function watchClearButton() {
   const clearButton = document.querySelector(
     ".container .editor .clear button"
   );
@@ -90,10 +112,26 @@ function clear() {
   });
 }
 
+function generateRandomRGB() {
+  var letters = "0123456789ABCDEF";
+  var color = "#";
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
+function watchRandomRGBButton() {
+  randomRGBButton.addEventListener("click", (e) => {
+    switchButton("randomRGB");
+  });
+}
+
 // Main Program
 
 makeGrid(16);
 draw();
 getGridSize();
-erase();
-clear();
+watchEraseButton();
+watchClearButton();
+watchRandomRGBButton();
