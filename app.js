@@ -1,4 +1,6 @@
-// Make a 16x16 Grid
+let isErase = false;
+
+// Make a Grid
 function makeGrid(size) {
   // Make container
   const container = document.querySelector(".container");
@@ -31,6 +33,10 @@ function draw() {
   const gridContainer = document.querySelector(".grid-container");
   gridContainer.addEventListener("mousemove", (e) => {
     const div = e.target;
+    if (isErase) {
+      e.target.classList.remove("trail");
+      return;
+    }
     div.classList.add("trail");
   });
 }
@@ -56,3 +62,15 @@ function getGridSize() {
 makeGrid(16);
 draw();
 getGridSize();
+const eraserButton = document.querySelector(
+  ".container .editor .eraser button"
+);
+eraserButton.addEventListener("click", (e) => {
+  if (isErase) {
+    isErase = false;
+    e.target.classList.remove("clicked");
+    return;
+  }
+  e.target.classList.add("clicked");
+  isErase = true;
+});
