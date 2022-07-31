@@ -1,5 +1,6 @@
 // Make a 16x16 Grid
 function makeGrid() {
+  const container = document.querySelector(".container");
   const gridContainer = document.createElement("div");
   gridContainer.classList.add("grid-container");
 
@@ -12,7 +13,7 @@ function makeGrid() {
     }
   }
 
-  document.body.appendChild(gridContainer);
+  container.appendChild(gridContainer);
 }
 
 makeGrid();
