@@ -1,11 +1,11 @@
 // Make a 16x16 Grid
-function makeGrid() {
+function makeGrid(size) {
   const container = document.querySelector(".container");
   const gridContainer = document.createElement("div");
   gridContainer.classList.add("grid-container");
 
-  for (let i = 1; i <= 16; i++) {
-    for (let j = 1; j <= 16; j++) {
+  for (let i = 1; i <= size; i++) {
+    for (let j = 1; j <= size; j++) {
       const div = document.createElement("div");
       div.setAttribute("data-row", i);
       div.setAttribute("data-col", j);
@@ -24,5 +24,21 @@ function draw() {
   });
 }
 
-makeGrid();
+function getGridSize() {
+  const inputRange = document.querySelector(
+    ".container .editor .grid-size input"
+  );
+
+  const inputRangeLabel = document.querySelector(
+    ".container .editor .grid-size label"
+  );
+
+  inputRange.addEventListener("change", (e) => {
+    const gridSize = e.target.value;
+    inputRangeLabel.textContent = `${gridSize}x${gridSize}`;
+  });
+}
+
+makeGrid(16);
 draw();
+getGridSize();
