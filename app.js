@@ -1,8 +1,13 @@
 // Make a 16x16 Grid
 function makeGrid(size) {
+  // Make container
   const container = document.querySelector(".container");
   const gridContainer = document.createElement("div");
   gridContainer.classList.add("grid-container");
+
+  if (!(size === 16)) {
+    gridContainer.style.cssText = `grid-template-columns: repeat(${size}, 1fr); grid-template-rows: repeat(${size}, 1fr);`;
+  }
 
   for (let i = 1; i <= size; i++) {
     for (let j = 1; j <= size; j++) {
@@ -13,6 +18,12 @@ function makeGrid(size) {
     }
   }
 
+  const isOldGridContainer = document.querySelector(
+    ".container div.grid-container"
+  );
+  if (isOldGridContainer) {
+    container.removeChild(isOldGridContainer);
+  }
   container.appendChild(gridContainer);
 }
 
@@ -36,6 +47,9 @@ function getGridSize() {
   inputRange.addEventListener("change", (e) => {
     const gridSize = e.target.value;
     inputRangeLabel.textContent = `${gridSize}x${gridSize}`;
+
+    makeGrid(gridSize);
+    draw();
   });
 }
 
