@@ -1,9 +1,10 @@
+// Global Variables
 let isErase = false;
 
-// Make a Grid
+// Function declarations
 function makeGrid(size) {
-  // Make container
   const container = document.querySelector(".container");
+
   const gridContainer = document.createElement("div");
   gridContainer.classList.add("grid-container");
 
@@ -59,29 +60,40 @@ function getGridSize() {
   });
 }
 
+function erase() {
+  const eraserButton = document.querySelector(
+    ".container .editor .eraser button"
+  );
+  eraserButton.addEventListener("click", (e) => {
+    if (isErase) {
+      isErase = false;
+      e.target.classList.remove("clicked");
+      return;
+    }
+    e.target.classList.add("clicked");
+    isErase = true;
+  });
+}
+
+function clear() {
+  const clearButton = document.querySelector(
+    ".container .editor .clear button"
+  );
+
+  clearButton.addEventListener("click", (e) => {
+    const gridSize = document.querySelector(
+      ".container .editor .grid-size input"
+    ).value;
+    console.log(gridSize);
+    makeGrid(gridSize);
+    draw();
+  });
+}
+
+// Main Program
+
 makeGrid(16);
 draw();
 getGridSize();
-const eraserButton = document.querySelector(
-  ".container .editor .eraser button"
-);
-eraserButton.addEventListener("click", (e) => {
-  if (isErase) {
-    isErase = false;
-    e.target.classList.remove("clicked");
-    return;
-  }
-  e.target.classList.add("clicked");
-  isErase = true;
-});
-
-const clearButton = document.querySelector(".container .editor .clear button");
-
-clearButton.addEventListener("click", (e) => {
-  const gridSize = document.querySelector(
-    ".container .editor .grid-size input"
-  ).value;
-  console.log(gridSize);
-  makeGrid(gridSize);
-  draw();
-});
+erase();
+clear();
