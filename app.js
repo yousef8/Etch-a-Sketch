@@ -74,3 +74,14 @@ eraserButton.addEventListener("click", (e) => {
   e.target.classList.add("clicked");
   isErase = true;
 });
+
+const clearButton = document.querySelector(".container .editor .clear button");
+
+clearButton.addEventListener("click", (e) => {
+  const gridSize = document.querySelector(
+    ".container .editor .grid-size input"
+  ).value;
+  console.log(gridSize);
+  makeGrid(gridSize);
+  draw();
+});
