@@ -30,3 +30,8 @@
 .grid-container div {
   border: 0.5px solid #eee;
 }
+
+/* ===================Styling used by JS========== */
+.trail {
+  background-color: black;
+}

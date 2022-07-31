@@ -16,4 +16,13 @@ function makeGrid() {
   container.appendChild(gridContainer);
 }
 
+function draw() {
+  const gridContainer = document.querySelector(".grid-container");
+  gridContainer.addEventListener("mousemove", (e) => {
+    const div = e.target;
+    div.classList.add("trail");
+  });
+}
+
 makeGrid();
+draw();
