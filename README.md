@@ -4,7 +4,7 @@ this project is made for [The Odin Project](https://www.theodinproject.com/) fou
 
 # Demo-Preview
 
-You can give the project a shot and see it live from this :pint_right: [link](https://yousef8.github.io/Etch-a-Sketch/)
+You can give the project a shot and see it live from this :point_right: [link](https://yousef8.github.io/Etch-a-Sketch/)
 
 # Installation
 
