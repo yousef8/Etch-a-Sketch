@@ -46,7 +46,7 @@ function draw() {
   gridContainer.addEventListener("mousemove", (e) => {
     const div = e.target;
     if (isErase) {
-      div.classList.remove("trail");
+      div.style.backgroundColor = "white";
       return;
     }
 
