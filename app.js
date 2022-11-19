@@ -1,6 +1,7 @@
 // Global Variables
 let isErase = false;
 let isRandom = false;
+let isDown = false;
 
 const eraserButton = document.querySelector(
   ".container .editor .eraser button"
@@ -43,8 +44,29 @@ function makeGrid(size) {
 
 function draw() {
   const gridContainer = document.querySelector(".grid-container");
+  gridContainer.addEventListener('mousedown', (e) => {
+    isDown = true;
+    const div = e.target;
+    if (isErase) {
+      div.style.backgroundColor = "white";
+      return;
+    }
+
+    if (isRandom) {
+      div.style.backgroundColor = generateRandomRGB();
+      return;
+    }
+    div.style.backgroundColor = "black";
+  });
+
+  gridContainer.addEventListener('mouseup', (e) => {
+    isDown = false;
+  })
   gridContainer.addEventListener("mousemove", (e) => {
     const div = e.target;
+    if (!isDown) {
+      return;
+    }
     if (isErase) {
       div.style.backgroundColor = "white";
       return;
